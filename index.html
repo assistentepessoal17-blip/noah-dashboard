@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah OS | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --border: #262626;
+            --text: #ffffff;
+            --text-dim: #a3a3a3;
+            --accent: #3b82f6;
+            --success: #10b981;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        .dashboard {
+            width: 90%;
+            max-width: 800px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            transition: border-color 0.3s;
+        }
+        .card:hover { border-color: var(--accent); }
+        
+        .header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .header h1 { font-size: 1.5rem; font-weight: 600; margin: 0; letter-spacing: -0.02em; }
+        .header .user { color: var(--text-dim); font-size: 0.9rem; }
+
+        .status-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+        .status-pill { background: #1a1a1a; padding: 0.75rem 1rem; border-radius: 0.75rem; display: flex; align-items: center; gap: 0.75rem; border: 1px solid var(--border); }
+        .dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 8px var(--success); }
+        .status-label { font-size: 0.8rem; font-weight: 500; }
+
+        .tasks-card { grid-column: 1 / -1; }
+        .tasks-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .tasks-header h2 { font-size: 1.1rem; margin: 0; color: var(--text-dim); }
+        
+        .task-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+        .task-item:last-child { border-bottom: none; }
+        .checkbox { width: 18px; height: 18px; border: 1.5px solid var(--accent); border-radius: 4px; }
+        .task-text { font-size: 0.9rem; font-weight: 300; }
+
+        .footer { grid-column: 1 / -1; text-align: center; font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div>
+                <h1>Noah OS <span style="font-weight: 300; color: var(--text-dim);">v2.0</span></h1>
+                <span class="user">Assistente de Tárcio Amoras</span>
+            </div>
+            <div style="font-size: 1.5rem;">🥷🏻</div>
+        </header>
+
+        <section class="status-grid">
+            <div class="status-pill"><div class="dot"></div><span class="status-label">Google Workspace</span></div>
+            <div class="status-pill"><div class="dot"></div><span class="status-label">Notion (Full Access)</span></div>
+            <div class="status-pill"><div class="dot"></div><span class="status-label">ElevenLabs (Chris)</span></div>
+            <div class="status-pill"><div class="dot"></div><span class="status-label">GitHub CLI</span></div>
+            <div class="status-pill"><div class="dot"></div><span class="status-label">Vercel Deploy</span></div>
+        </section>
+
+        <div class="card tasks-card">
+            <div class="tasks-header">
+                <h2>Agenda • Hoje</h2>
+                <span style="font-size: 0.8rem; color: var(--accent);">06 Fev 2026</span>
+            </div>
+            <div class="task-item"><div class="checkbox"></div><span class="task-text">Comprar remédios para TDAH</span></div>
+            <div class="task-item"><div class="checkbox"></div><span class="task-text">Organizar a banheira de Gelo</span></div>
+            <div class="task-item"><div class="checkbox"></div><span class="task-text">Organizar e fortalecer segurança do Noah</span></div>
+            <div class="task-item"><div class="checkbox"></div><span class="task-text">Estruturar apresentações Web estáveis</span></div>
+        </div>
+
+        <footer class="footer">
+            Powered by Claude 4.5 Thinking • Integrado via OpenClaw
+        </footer>
+    </div>
+</body>
+</html>
