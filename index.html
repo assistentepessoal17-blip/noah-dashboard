@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noah OS | Dashboard v3</title>
+    <title>Noah OS | Dashboard v3.1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
@@ -80,6 +80,9 @@
         .task-bullet { width: 14px; height: 14px; border: 1px solid var(--accent); border-radius: 3px; margin-top: 3px; flex-shrink: 0; }
         .task-content { font-size: 0.95rem; font-weight: 300; line-height: 1.4; }
 
+        .skill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; }
+        .skill-pill { background: #111111; border: 1px solid var(--border); padding: 0.5rem; border-radius: 0.5rem; font-size: 0.75rem; text-align: center; color: var(--text-muted); }
+
         .footer {
             margin-top: 4rem;
             text-align: center;
@@ -94,40 +97,55 @@
         <header class="header">
             <div>
                 <span>NOAH_INTELLIGENCE_OS // 2026</span>
-                <h1>Dashboard <span style="color:var(--accent)">v3.0</span></h1>
+                <h1>Dashboard <span style="color:var(--accent)">v3.1</span></h1>
             </div>
             <div style="text-align: right">
                 <span>07 FEV 2026</span><br>
-                <span style="color:var(--text)">Sábado, 09:35</span>
+                <span style="color:var(--text)">Sábado, 09:40</span>
             </div>
         </header>
 
         <div class="grid">
             <div class="card">
-                <h2><div class="dot"></div> System Status</h2>
+                <h2><div class="dot"></div> System Health</h2>
                 <div class="status-list">
-                    <div class="status-item"><span>Google Workspace</span> <span class="status-val">ONLINE</span></div>
-                    <div class="status-item"><span>Notion Database</span> <span class="status-val">LINKED</span></div>
-                    <div class="status-item"><span>ElevenLabs (Chris)</span> <span class="status-val">ACTIVE</span></div>
+                    <div class="status-item"><span>Google Core</span> <span class="status-val">ONLINE</span></div>
+                    <div class="status-item"><span>Notion Core</span> <span class="status-val">LINKED</span></div>
+                    <div class="status-item"><span>ElevenLabs Core</span> <span class="status-val">ACTIVE</span></div>
                     <div class="status-item"><span>Vercel Cloud</span> <span class="status-val">SYNCED</span></div>
                 </div>
             </div>
 
-            <div class="card" style="grid-row: span 2;">
-                <h2><div class="dot"></div> Agenda do Dia</h2>
-                <div class="task-list">
-                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Estruturar rotina de hábito semanal</div></div>
-                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Revisar protocolos de segurança hospitalar</div></div>
-                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Finalizar auditoria técnica semanal</div></div>
+            <div class="card">
+                <h2><div class="dot"></div> Skills Arsenal</h2>
+                <div class="skill-grid">
+                    <div class="skill-pill">github</div>
+                    <div class="skill-pill">gog</div>
+                    <div class="skill-pill">healthcheck</div>
+                    <div class="skill-pill">notion-skill</div>
+                    <div class="skill-pill">security-audit</div>
+                    <div class="skill-pill">reflect-learn</div>
+                    <div class="skill-pill">sag</div>
+                    <div class="skill-pill">self-improver</div>
+                    <div class="skill-pill">task-status</div>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" style="grid-column: span 1;">
                 <h2><div class="dot"></div> Intelligence</h2>
                 <div class="status-list">
-                    <div class="status-item"><span>Model</span> <span style="color:var(--text)">Claude 4.5</span></div>
-                    <div class="status-item"><span>Learning Mode</span> <span class="status-val">ENABLED</span></div>
+                    <div class="status-item"><span>Primary Model</span> <span style="color:var(--text)">Claude 4.5</span></div>
+                    <div class="status-item"><span>Self-Improvement</span> <span class="status-val">ACTIVE</span></div>
                     <div class="status-item"><span>Persistence</span> <span style="color:var(--text)">3 Retries</span></div>
+                </div>
+            </div>
+
+            <div class="card" style="grid-column: 1 / -1;">
+                <h2><div class="dot"></div> Agenda do Dia</h2>
+                <div class="task-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Estruturar rotina de hábito semanal</div></div>
+                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Finalizar auditoria técnica semanal</div></div>
+                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Consolidar arsenal de Skills no Dashboard</div></div>
                 </div>
             </div>
         </div>
