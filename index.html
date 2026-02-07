@@ -3,102 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noah OS | Dashboard</title>
+    <title>Noah OS | Dashboard v3</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --surface: #141414;
-            --border: #262626;
-            --text: #ffffff;
-            --text-dim: #a3a3a3;
+            --bg: #050505;
+            --card: #0d0d0d;
+            --border: #1a1a1a;
             --accent: #3b82f6;
+            --text: #ffffff;
+            --text-muted: #666666;
             --success: #10b981;
         }
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Outfit', sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            padding: 2rem 1rem;
             min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
         }
-        .dashboard {
-            width: 90%;
-            max-width: 800px;
+        .container {
+            width: 100%;
+            max-width: 900px;
+            animation: fadeIn 1.2s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+        }
+        .header h1 { font-size: 1.8rem; font-weight: 600; margin: 0; }
+        .header span { color: var(--text-muted); font-size: 0.9rem; font-family: 'JetBrains Mono', monospace; }
+
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            animation: fadeIn 1s ease-out;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
+
         .card {
-            background: var(--surface);
+            background: var(--card);
             border: 1px solid var(--border);
+            border-radius: 1.2rem;
             padding: 1.5rem;
-            border-radius: 1rem;
-            transition: border-color 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .card:hover { border-color: var(--accent); }
-        
-        .header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .header h1 { font-size: 1.5rem; font-weight: 600; margin: 0; letter-spacing: -0.02em; }
-        .header .user { color: var(--text-dim); font-size: 0.9rem; }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.3;
+        }
 
-        .status-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
-        .status-pill { background: #1a1a1a; padding: 0.75rem 1rem; border-radius: 0.75rem; display: flex; align-items: center; gap: 0.75rem; border: 1px solid var(--border); }
-        .dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 8px var(--success); }
-        .status-label { font-size: 0.8rem; font-weight: 500; }
+        h2 { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        h2 .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
-        .tasks-card { grid-column: 1 / -1; }
-        .tasks-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .tasks-header h2 { font-size: 1.1rem; margin: 0; color: var(--text-dim); }
-        
-        .task-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
-        .task-item:last-child { border-bottom: none; }
-        .checkbox { width: 18px; height: 18px; border: 1.5px solid var(--accent); border-radius: 4px; }
-        .task-text { font-size: 0.9rem; font-weight: 300; }
+        .status-list { list-style: none; padding: 0; margin: 0; }
+        .status-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 0.5rem 0; border-bottom: 1px solid #141414; }
+        .status-item:last-child { border-bottom: none; }
+        .status-val { color: var(--success); font-weight: 500; font-family: 'JetBrains Mono', monospace; }
 
-        .footer { grid-column: 1 / -1; text-align: center; font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem; }
+        .task-list { list-style: none; padding: 0; margin: 0; }
+        .task-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+        .task-bullet { width: 14px; height: 14px; border: 1px solid var(--accent); border-radius: 3px; margin-top: 3px; flex-shrink: 0; }
+        .task-content { font-size: 0.95rem; font-weight: 300; line-height: 1.4; }
+
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
     </style>
 </head>
 <body>
-    <div class="dashboard">
+    <div class="container">
         <header class="header">
             <div>
-                <h1>Noah OS <span style="font-weight: 300; color: var(--text-dim);">v2.0</span></h1>
-                <span class="user">Assistente de Tárcio Amoras</span>
+                <span>NOAH_INTELLIGENCE_OS // 2026</span>
+                <h1>Dashboard <span style="color:var(--accent)">v3.0</span></h1>
             </div>
-            <div style="font-size: 1.5rem;">🥷🏻</div>
+            <div style="text-align: right">
+                <span>07 FEV 2026</span><br>
+                <span style="color:var(--text)">Sábado, 09:35</span>
+            </div>
         </header>
 
-        <section class="status-grid">
-            <div class="status-pill"><div class="dot"></div><span class="status-label">Google Workspace</span></div>
-            <div class="status-pill"><div class="dot"></div><span class="status-label">Notion (Full Access)</span></div>
-            <div class="status-pill"><div class="dot"></div><span class="status-label">ElevenLabs (Chris)</span></div>
-            <div class="status-pill"><div class="dot"></div><span class="status-label">GitHub CLI</span></div>
-            <div class="status-pill"><div class="dot"></div><span class="status-label">Vercel Deploy</span></div>
-        </section>
-
-        <div class="card tasks-card">
-            <div class="tasks-header">
-                <h2>Agenda • Hoje</h2>
-                <span style="font-size: 0.8rem; color: var(--accent);">06 Fev 2026</span>
+        <div class="grid">
+            <div class="card">
+                <h2><div class="dot"></div> System Status</h2>
+                <div class="status-list">
+                    <div class="status-item"><span>Google Workspace</span> <span class="status-val">ONLINE</span></div>
+                    <div class="status-item"><span>Notion Database</span> <span class="status-val">LINKED</span></div>
+                    <div class="status-item"><span>ElevenLabs (Chris)</span> <span class="status-val">ACTIVE</span></div>
+                    <div class="status-item"><span>Vercel Cloud</span> <span class="status-val">SYNCED</span></div>
+                </div>
             </div>
-            <div class="task-item"><div class="checkbox"></div><span class="task-text">Comprar remédios para TDAH</span></div>
-            <div class="task-item"><div class="checkbox"></div><span class="task-text">Organizar a banheira de Gelo</span></div>
-            <div class="task-item"><div class="checkbox"></div><span class="task-text">Organizar e fortalecer segurança do Noah</span></div>
-            <div class="task-item"><div class="checkbox"></div><span class="task-text">Estruturar apresentações Web estáveis</span></div>
+
+            <div class="card" style="grid-row: span 2;">
+                <h2><div class="dot"></div> Agenda do Dia</h2>
+                <div class="task-list">
+                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Estruturar rotina de hábito semanal</div></div>
+                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Revisar protocolos de segurança hospitalar</div></div>
+                    <div class="task-item"><div class="task-bullet"></div><div class="task-content">Finalizar auditoria técnica semanal</div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><div class="dot"></div> Intelligence</h2>
+                <div class="status-list">
+                    <div class="status-item"><span>Model</span> <span style="color:var(--text)">Claude 4.5</span></div>
+                    <div class="status-item"><span>Learning Mode</span> <span class="status-val">ENABLED</span></div>
+                    <div class="status-item"><span>Persistence</span> <span style="color:var(--text)">3 Retries</span></div>
+                </div>
+            </div>
         </div>
 
         <footer class="footer">
-            Powered by Claude 4.5 Thinking • Integrado via OpenClaw
+            [Noah Personal Assistant] // Built for Tárcio Amoras // BELÉM_PA_BRAZIL
         </footer>
     </div>
 </body>
